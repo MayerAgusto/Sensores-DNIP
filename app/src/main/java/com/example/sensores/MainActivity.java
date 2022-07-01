@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
-    private TextView textView, textMagnetometro;
+    private TextView textView, textMagnetometro,textRotacion;
     private SensorManager sensorManager;
     private Sensor sensor, magnetometer;
 
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         textView = findViewById(R.id.textAcelerometro);
         textMagnetometro = findViewById(R.id.textMagnetometro);
+        textRotacion     = findViewById(R.id.textView4);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
@@ -43,6 +44,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             textView.setText("valor de x: " +sensorEvent.values[0] + "\n"
                     + "valor de y: " + sensorEvent.values[1] + "\n"
                     + "valor de z: " + sensorEvent.values[2]);
+            if(sensorEvent.values[1]>0){
+                textRotacion.setText("Vertical 1");
+            }else if (sensorEvent.values[1]<0){
+                textRotacion.setText("Vertical 2");
+            }
+            if(sensorEvent.values[0]>0){
+                textRotacion.setText("Horizontal 2");
+            }else if (sensorEvent.values[0]<0){
+                textRotacion.setText("Horizontal 1 ");
+            }
         }
         if(sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD){
             textMagnetometro.setText(
